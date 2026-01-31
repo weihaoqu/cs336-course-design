@@ -19,50 +19,81 @@ The process is iterative, tackling one module or topic at a time to ensure clari
 
 ### 2. The Core Loop (For Each Topic)
 
-For each topic/module identified in the source material, follow this structured interview process:
+For each topic/module identified, follow this efficient, batched interview process.
 
-#### a. Propose Prerequisites
+#### Step A: Analyze Prerequisites
 
-- Analyze the topic and propose a numbered list of 3-5 potential **prerequisites**. These are the foundational concepts a student should know *before* starting the module.
-- Ask the user to select the relevant prerequisite numbers.
+1.  **Identify & List:** Generate a numbered list of 3-5 potential prerequisite concepts.
+2.  **Batch Query:** Present the full list to the user at once.
+3.  **Request Batched Feedback:** Ask the user to categorize *all* items in one go using a comma-separated string of shorthands.
+    *   `i` = Include as a full lesson
+    *   `b` = Briefly Cover as a recap
+    *   `a` = Assume Known
 
-**Example Prompt:**
-> **Topic: Static Taint Analysis**
-> Please choose the foundational knowledge students should have:
-> 1.  Basic API Concepts
-> 2.  Graph Theory Fundamentals
-> 3.  Data-Flow Analysis Concepts
-> 4.  Security Best Practices
+**Example Interaction:**
+> **Agent:** Let's cover prerequisites for **DFA**. Please categorize the following:
+> 1.  Set Theory
+> 2.  Formal Languages
+> 3.  Graph Theory
+>
+> Please respond with a list of shorthands corresponding to the numbers above (e.g., `b, i, a` means briefly cover #1, include #2, assume #3).
 
-#### b. Propose Core Concepts
+#### Step B: Analyze Core Concepts
 
-- Propose a numbered list of 4-6 **core concepts** that should be taught within the module.
-- Ask the user to select the relevant concept numbers and indicate any that should be emphasized.
+1.  **Identify & List:** Generate a numbered list of 4-6 potential core concepts.
+2.  **Batch Query:** Present the full list at once.
+3.  **Request Batched Feedback:** Ask for a comma-separated string of shorthands:
+    *   `c` = Cover
+    *   `e` = Emphasize
+    *   `s` = Skip
 
-**Example Prompt:**
-> Please select the core theoretical ideas to be taught:
-> 1.  Modeling Privacy Policies as Code
-> 2.  Graph Reachability Analysis
-> 3.  Relational Reasoning
-> 4.  Static API Call Analysis
+**Example Interaction:**
+> **Agent:** Now for the core concepts of DFA:
+> 1.  Formal Definition (5-tuple)
+> 2.  State Transition Diagrams
+> 3.  Language of a DFA
+> 4.  Designing DFAs
+>
+> Please respond with your choices in order (e.g., `e, c, e, s`).
 
-#### c. Propose a Teaching Order
+#### Step C: Propose and Refine the Teaching Order
 
-- Based on the user's selections, use your reasoning to synthesize a logical **teaching order**.
-- Structure the output as a series of 4-6 "Lessons."
-- For each lesson, include an "Objective" and the "Content" to be covered.
-- **Consult `references/pedagogy.md`** for common teaching patterns (e.g., "Problem-First," "Theory-to-Practice") to create a more effective and logical flow.
+1.  **Synthesize Initial Plan:** Based on the feedback, synthesize and present a logical, numbered teaching order.
+2.  **Enter Modification Loop:** Ask the user what they want to do next. The loop continues until the user approves the plan.
 
-#### d. User Approval & Refinement
+**Example Interaction:**
+> **Agent:** Here is the proposed lesson plan:
+> 1.  **Lesson 1: Foundations...**
+> 2.  **Lesson 2: The Formal DFA...**
+> ...
+> What would you like to do? You can **(m)odify** a lesson, **(r)eorder** lessons, **(d)elete** a lesson, or **(a)pprove** the plan.
+> **User:** `m 2` (or just `m`)
+> ...
 
-- Present the proposed teaching order to the user and ask for their approval. Be prepared to make adjustments based on their feedback.
+3.  **Consult Pedagogy:** **Consult `references/pedagogy.md`** throughout.
 
 ### 3. Generate the Artifact
 
 - Once the user approves the lesson plan for a module, append the well-formatted Markdown for that module to the designated output file.
 - Use clear headings and lists to ensure the final document is readable and well-structured.
 
+#### Step D: Design Learning Activities (Optional)
+
+1.  **Offer Activities:** After finalizing the lesson plan content, ask: "Would you like to add specific active learning activities for this module?"
+2.  **Propose Tailored Options:** If the user agrees, propose 3-4 specific activities relevant to the module's content (e.g., "Interactive DFA Builder," "Regex Golf Game," "Group Proof Workshop").
+3.  **Refine & Append:** Ask the user to select or modify these activities. Append the chosen activities to the end of the module's section in the output file under an "### Active Learning" heading.
+
 ### 4. Continue to Next Topic
 
 - After saving the progress, move to the next topic in the source material and repeat the core loop.
-- Once all topics are covered, inform the user that the teaching plan is complete.
+
+### 5. Phase 4: Delivery Strategy & Tooling Plan
+
+Once all curriculum topics are covered, initiate the Delivery Strategy phase.
+
+1.  **Assess Delivery Goals:** Ask the user: "Now that the curriculum content is defined, how do you plan to deliver it? (e.g., Interactive Web App, Slide Decks, Jupyter Notebooks, Video Series)."
+2.  **Generate Implementation Plan:** Based on their choice, generate a comprehensive **Delivery Plan**.
+    *   **Propose Tech Stack:** Suggest appropriate tools (e.g., React + D3.js for automata, Reveal.js for slides).
+    *   **List Assets:** Identify necessary assets (e.g., JSON data for graphs, image assets, code templates).
+    *   **Development Roadmap:** Create a step-by-step guide to building the delivery vehicle.
+3.  **Write to File:** Save this plan to a new file named `delivery-plan.md` (or similar) in the project directory.
