@@ -1,0 +1,11 @@
+{
+  "name": "curriculum-designer",
+  "version": "1.0.0",
+  "description": "help teaching figure out the teaching material and plan.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
